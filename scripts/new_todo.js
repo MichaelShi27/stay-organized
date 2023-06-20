@@ -56,5 +56,5 @@ fetch("http://localhost:8081/api/todos", {
     }
 })
     .then(() => {
-    location.href = "/todos.html";
+    location.href = "todos.html";
     })

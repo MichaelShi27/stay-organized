@@ -30,15 +30,16 @@ const displayTasks = (selectUser) => {
     fetch(baseURL + "todos/" + selectUser.value)
         .then(response => response.json())
         .then(data => {
-            displayUserTasks.innerHTML = `
+            for(let i = 0; i < data.length; i++)
+            displayUserTasks.innerHTML += `
             <tr class="fw-normal">
-                <td class="align-middle">${data.category}</td>
-                <td class="align-middle">${data.description}</td>
+                <td class="align-middle">${data[i].category}</td>
+                <td class="align-middle">${data[i].description}</td>
                 <td class="align-middle">
-                    <h6 class="mb-0"><span class="badge bg-danger">${data.priority} priority</span></h6>
+                    <h6 class="mb-0"><span class="badge bg-danger">${data[i].priority} priority</span></h6>
                 </td>
-                <td class="align-middle">${data.deadline}</td>
-                <td class="align-middle">${data.completed}</td>
+                <td class="align-middle">${data[i].deadline}</td>
+                <td class="align-middle">${data[i].completed}</td>
             </tr>
             `
         })
