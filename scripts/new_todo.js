@@ -48,8 +48,6 @@ const todoData = {
     deadline: deadlineInput.value,
 };
 
-console.log(todoData)
-
 fetch("http://localhost:8081/api/todos", {
     method: "POST",
     body: JSON.stringify(todoData),
@@ -57,7 +55,6 @@ fetch("http://localhost:8081/api/todos", {
         "Content-Type": "application/json",
     }
 })
-    .then((response) => response.json())
-    .then((data) => {
-        location.href = "/todos.html"
+    .then(() => {
+    location.href = "/todos.html";
     })
