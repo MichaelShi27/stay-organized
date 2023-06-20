@@ -1,6 +1,6 @@
 "use strict";
 
-const baseURL = "http://localhost:8083/api/users";
+const baseURL = "http://localhost:8083/api/";
 const selectUser = document.getElementById("users")
 const searchBtn = document.getElementById("searchBtn");
 
@@ -12,25 +12,22 @@ window.onload = () => {
     }
 }
 const fetchUsers = () => {
-    selectUser.length = 1;
 
-    fetch(baseURL, {
-        method: 'GET',
-    })
+
+    fetch(baseURL + "users")
         .then(response => response.json())
         .then(data => {
             for (let i = 0; i < data.length; i++) {
-                let userOptions = new Option(data[i].name, data[i].id);
-                selectUser.appendChild(userOptions);
+                const userOption = new Option(data[i].name, data[i].id);
+                selectUser.appendChild(userOption);
             }
         })
 }
 
-const displayTasks = (userID) => {
-    const baseURL2 = "http://localhost:8083/api/todos/"
+const displayTasks = (selectUser) => {
     const displayUserTasks = document.getElementById("userTasks");
 
-    fetch(baseURL2 + userID.value)
+    fetch(baseURL + "todos/" + selectUser.value)
         .then(response => response.json())
         .then(data => {
             displayUserTasks.innerHTML = `
