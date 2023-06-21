@@ -25,12 +25,13 @@ const fetchUsers = () => {
 }
 
 const displayTasks = (selectUser) => {
-    const displayUserTasks = document.getElementById("userTasks");
+    let displayUserTasks = document.getElementById("userTasks");
+    displayUserTasks.innerHTML = "";
 
-    fetch(baseURL + "todos/" + selectUser.value)
+    fetch(baseURL + "todos/" + "byuser/" + selectUser.value)
         .then(response => response.json())
         .then(data => {
-            for(let i = 0; i < data.length; i++)
+            for (let i = 0; i < data.length; i++) {
             displayUserTasks.innerHTML += `
             <tr class="fw-normal">
                 <td class="align-middle">${data[i].category}</td>
@@ -42,5 +43,6 @@ const displayTasks = (selectUser) => {
                 <td class="align-middle">${data[i].completed}</td>
             </tr>
             `
+            }
         })
 }
