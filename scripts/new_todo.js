@@ -7,6 +7,7 @@ const descriptionInput = document.getElementById("description");
 const deadlineInput = document.getElementById("deadline");
 const newToDoInput = document.getElementById("todo-form");
 
+
 window.onload = function() {
     populateUserDropdown();
     populateCategoriesDropdown();
@@ -40,21 +41,26 @@ function populateCategoriesDropdown() {
     });
 }
 
-const todoData = {
-    userid: userIdInput.value,
-    category: categoryInput.value,
-    priority: priorityInput.value,
-    description: descriptionInput.value,
-    deadline: deadlineInput.value,
-};
+newTodoForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-fetch("http://localhost:8081/api/todos", {
-    method: "POST",
-    body: JSON.stringify(todoData),
-    headers: {
-        "Content-Type": "application/json",
-    }
-})
+    const todoData = {
+        userid: userIdInput.value,
+        category: categoryInput.value,
+        priority: priorityInput.value,
+        description: descriptionInput.value,
+        deadline: deadlineInput.value,
+    };
+
+    fetch("http://localhost:8081/api/todos", {
+        method: "POST",
+        body: JSON.stringify(todoData),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
     .then(() => {
     location.href = "todos.html";
     })
+});
+
